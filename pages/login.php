@@ -16,10 +16,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_email'] = $user['email'];
         $_SESSION['user_name'] = $user['name'];
+
+        if (isset($_POST["remember"])) {
+            setcookie("user_email", $_POST["email"], time()+60*60*24*30, "/");  // 30 days
+            setcookie("user_password", $_POST["password"], time()+60*60*24*30, "/");
+        }
+        else{
+            setcookie("user_email", "", time()-3600, "/");
+            setcookie("user_password", "", time()-3600 , "/");
+        }
         header("Location: index.php");
         exit();
     } else {
         $_SESSION['error'] = "Invalid Credentials.";
+    }
+}
+
+function setValue($field) {
+    if(isset($_COOKIE[$field])){
+        echo $_COOKIE[$field];
+    }
+}
+
+function setChecked($field) {
+    if(isset($_COOKIE[$field])){
+        echo "checked='checked'";
     }
 }
 
@@ -36,12 +57,16 @@ include '../includes/header.php';
         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" name="email" class="input input-bordered w-full" required>
+                <input type="email" name="email" class="input input-bordered w-full" value="<?php setValue("user_email"); ?>" required >
             </div>
             
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" name="password" class="input input-bordered w-full" required>
+                <input type="password" name="password" class="input input-bordered w-full" value="<?php setValue("user_password"); ?>" required >
+            </div>
+
+            <div class="mb-4">
+                <input type="checkbox" name="remember" <?php setChecked("user_email")?>> Remember Me
             </div>
             
             <button type="submit" class="btn btn-primary w-full">Login</button>

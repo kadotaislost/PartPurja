@@ -1,6 +1,6 @@
 <?php
 $title = "Home Page";
-include 'includes/header.php';
+include '../includes/header.php';
 
 
 ?>
