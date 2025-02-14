@@ -7,15 +7,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     $conn = new Database();
-    $sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+    $sql = "SELECT * FROM users WHERE email = ? AND password_hash = ?";
     $hashed_password = sha1(md5($password));
     $result = $conn->select($sql, [$email, $hashed_password]);
     
     if (!empty($result) && count($result) === 1) {
         $user = $result[0];
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['user_email'] = $user['email'];
-        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_name'] = $user['full_name'];
 
         if (isset($_POST["remember"])) {
             setcookie("user_email", $_POST["email"], time()+60*60*24*30, "/");  // 30 days

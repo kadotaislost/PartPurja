@@ -27,9 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Verification code expired. Please request a new one.";
         } elseif ($entered_code == $_SESSION['verification_code']) {
             $conn = new Database();
-            $sql = "INSERT INTO users (name, email, password, role, verified) VALUES (?, ?, ?, ?, 1)";
+            $sql = "INSERT INTO users (full_name, email, password_hash, phone, is_verified) VALUES (?, ?, ?, ?, 1)";
             $user = $_SESSION['temp_user'];
-            $returnId = $conn->create($sql, [$user['name'], $user['email'], $user['password'], $user['role']]);
+            $returnId = $conn->create($sql, [$user['full_name'], $user['email'], $user['password_hash'], $user['phone']]);
 
             if ($returnId) {
                 unset($_SESSION['verification_code'], $_SESSION['verification_time'], $_SESSION['temp_user']);

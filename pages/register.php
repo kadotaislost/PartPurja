@@ -4,19 +4,19 @@ require_once 'database.php';
 require_once 'mailer.php'; // Include mailer script
 
 // Redirect logged-in users to index.php
-if (isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
+// if (isset($_SESSION['user_id'])) {
+//     header("Location: index.php");
+//     exit();
+// }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = trim($_POST['name']);
+    $full_name = trim($_POST['full_name']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $confirm_password = trim($_POST['confirm_password']);
-    $role = trim($_POST['role']);
+    $phone = trim($_POST['phone']);
 
-    if (empty($name) || empty($email) || empty($password) || empty($confirm_password) || empty($role)) {
+    if (empty($full_name) || empty($email) || empty($password) || empty($confirm_password) || empty($phone)) {
         $error = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid email format.";
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Passwords do not match.";
     } else {
         $conn = new Database();
-        $sql = "SELECT id FROM users WHERE email = ?";
+        $sql = "SELECT user_id FROM users WHERE email = ?";
         $count = $conn->countRows($sql, [$email]);
 
         if ($count > 0) {
@@ -35,10 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['verification_code'] = $verification_code;
             $_SESSION['verification_time'] = time(); // Store time for expiration
             $_SESSION['temp_user'] = [
-                'name' => $name,
+                'full_name' => $full_name,
                 'email' => $email,
-                'password' => sha1(md5($password)),
-                'role' => $role
+                'password_hash' => sha1(md5($password)),
+                'phone' => $phone,
             ];
 
             // Send verification code to email
@@ -69,12 +69,16 @@ include '../includes/header.php';
         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" class="input input-bordered w-full" required>
+                <input type="text" name="full_name" class="input input-bordered w-full" required>
             </div>
             
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" class="input input-bordered w-full" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="text" name="phone" class="input input-bordered w-full" required>
             </div>
             
             <div class="mb-4">
@@ -87,13 +91,6 @@ include '../includes/header.php';
                 <input type="password" name="confirm_password" class="input input-bordered w-full" required>
             </div>
             
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Role</label>
-                <select name="role" class="input input-bordered w-full" required>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
             
             <button type="submit" class="btn btn-primary w-full">Register</button>
         </form>
