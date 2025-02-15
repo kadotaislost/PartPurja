@@ -28,7 +28,7 @@ $productsResult = $conn->select($productsQuery);
     <ul class="space-y-2">
         <?php foreach ($categoriesResult as $category) : ?>
             <li>
-                <a href="category.php?id=<?= $category['category_id']; ?>" class="block p-2 hover:bg-gray-100 rounded">
+                <a href="category.php?id=<?= $category['category_id']; ?>" class="block p-2 hover:bg-blue-100 rounded">
                     <?= htmlspecialchars($category['category_name']); ?>
                 </a>
             </li>

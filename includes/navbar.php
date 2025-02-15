@@ -7,7 +7,7 @@ include 'header.php';
         <div class="flex justify-between items-center gap-5">
             <!-- Logo -->
             <div class="flex items-center">
-                <img src="../assets/images/partpurjalogo.svg" alt="PartPurja Logo" class="w-12 h-12">
+                <img src="../assets/images/logo_noborder.png" alt="PartPurja Logo" class="w-12 h-12 rounded-full">
                 <p class="text-2xl font-semibold ml-2"><a href="index.php" class="hover:text-gray-700">PartPurja</a></p>
             </div>
 
