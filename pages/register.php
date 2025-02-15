@@ -3,11 +3,10 @@ session_start();
 require_once 'database.php';
 require_once 'mailer.php'; // Include mailer script
 
-// Redirect logged-in users to index.php
-// if (isset($_SESSION['user_id'])) {
-//     header("Location: index.php");
-//     exit();
-// }
+if(isset($_SESSION['user_id'])){
+    header('Location: index.php');
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = trim($_POST['full_name']);
