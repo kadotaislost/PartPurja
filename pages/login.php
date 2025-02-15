@@ -15,7 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result[0];
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['user_email'] = $user['email'];
-        $_SESSION['user_name'] = $user['full_name'];
+        $_SESSION['full_name'] = $user['full_name'];
+        $_SESSION['profile_image'] = $user['profile_image'];
+        $_SESSION['phone'] = $user['phone'];
+        $_SESSION['status'] = $user['status'];
+        $_SESSION['status'] = $user['status'];
 
         if (isset($_POST["remember"])) {
             setcookie("user_email", $_POST["email"], time()+60*60*24*30, "/");  // 30 days
@@ -86,4 +90,6 @@ include '../includes/header.php';
     </div>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+</body>
+</html>
+
