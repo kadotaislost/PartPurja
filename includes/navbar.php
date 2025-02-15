@@ -14,7 +14,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
             <!-- Logo -->
                 <a href="index.php" class="flex items-center space-x-2">
                     <img src="../assets/images/logo_noborder.png" alt="PartPurja Logo" class="w-12 h-12 rounded-full">
-                    <p class="text-2xl font-semibold hidden sm:block hover:text-gray-700">PartPurja</p>
+                    <p class="text-2xl font-semibold hidden sm:block">PartPurja</p>
                 </a>
  
 
