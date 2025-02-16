@@ -98,7 +98,7 @@ $comments = $conn->select($commentsQuery, [$id]);
         <?php if (!empty($comments)): ?>
         <?php foreach ($comments as $comment): ?>
             <div class="border border-gray-200 p-4 rounded-lg flex items-start gap-4">
-                <img src="../assets/profile_pictures/<?= htmlspecialchars($comment['profile_image']); ?>" 
+                <img src="<?= htmlspecialchars($comment['profile_image']); ?>" 
                      alt="<?= htmlspecialchars($comment['full_name']); ?>" 
                      class="w-10 h-10 rounded-full object-cover">
                 <div>
