@@ -29,6 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->update($sql, [$full_name, $email, $phone, $user_id]);
     }
     $_SESSION['success'] = "Profile updated successfully!";
+    $_SESSION['full_name'] = $full_name;
+    $_SESSION['profile_image'] = $profile_image;
+    $_SESSION['phone'] = $phone;
+    $_SESSION['email'] = $email;
     header("Location: profile.php");
     ob_end_flush();
     exit();
