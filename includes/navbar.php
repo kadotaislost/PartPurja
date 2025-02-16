@@ -48,7 +48,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                 <?php else: ?>
                     <div class="flex items-center gap-4">
                         <a href="profile.php" class="flex items-center gap-4">
-                            <img src="../assets/profile_pictures/<?= htmlspecialchars($profilePicture) ?>" alt="Profile" class="w-12 h-12 rounded-full border">
+                            <img src="<?= htmlspecialchars($profilePicture) ?>" alt="Profile" class="w-12 h-12 rounded-full border">
                             <span class="text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
                         </a>
                         <a class="btn btn-neutral btn-outline px-6" href="logout.php">Logout</a>
