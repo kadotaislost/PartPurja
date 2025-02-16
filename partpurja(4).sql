@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2025 at 12:50 AM
+-- Generation Time: Feb 16, 2025 at 07:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,6 +64,14 @@ CREATE TABLE `comments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `product_id`, `user_id`, `comment_text`, `created_at`) VALUES
+(1, 1, 1, 'Is this product still available?', '2025-02-15 12:41:48'),
+(2, 1, 6, 'hi! Is this product still available?', '2025-02-15 12:42:58');
+
 -- --------------------------------------------------------
 
 --
@@ -78,7 +86,6 @@ CREATE TABLE `products` (
   `category_id` int(11) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `product_condition` enum('new','used') NOT NULL,
-  `contact_phone` varchar(15) DEFAULT NULL,
   `product_status` enum('available','sold','removed') DEFAULT 'available',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -87,32 +94,41 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `user_id`, `title`, `description`, `category_id`, `price`, `product_condition`, `contact_phone`, `product_status`, `created_at`) VALUES
-(1, 1, 'HP Laptop Battery', 'Original HP 6-cell battery, compatible with Pavilion series. Original HP 6-cell battery, compatible with Pavilion series. Original HP 6-cell battery, compatible with Pavilion series. Original HP 6-cell battery, compatible with Pavilion series.', 1, 45.00, 'new', '9800000001', 'available', '2025-02-13 23:42:54'),
-(2, 2, 'Lenovo ThinkPad Keyboard', 'Replacement keyboard for ThinkPad T490 series.', 1, 30.00, 'new', '9800000002', 'available', '2025-02-13 23:42:54'),
-(3, 3, 'Dell 8GB DDR4 RAM', 'Dell original DDR4 RAM module for laptops.', 1, 50.00, 'used', '9800000003', 'available', '2025-02-13 23:42:54'),
-(4, 2, 'Samsung Galaxy S20 Battery', 'Genuine Samsung battery for Galaxy S20.', 2, 35.00, 'new', '9800000002', 'available', '2025-02-13 23:42:54'),
-(5, 3, 'Google Pixel 6 Charging Port', 'Original charging port replacement for Pixel 6.', 2, 25.00, 'new', '9800000003', 'available', '2025-02-13 23:42:54'),
-(6, 1, 'Pioneer Car Subwoofer', 'Powerful 12-inch subwoofer for deep bass.', 3, 180.00, 'used', '9800000001', 'available', '2025-02-13 23:42:54'),
-(7, 2, 'Dash Cam 1080p', 'Night vision dashboard camera with loop recording.', 3, 75.00, 'new', '9800000002', 'available', '2025-02-13 23:42:54'),
-(8, 3, 'Razer BlackWidow Keyboard', 'Mechanical gaming keyboard with RGB lighting.', 4, 90.00, 'used', '9800000003', 'available', '2025-02-13 23:42:54'),
-(9, 4, 'PlayStation 5 Controller', 'Official Sony DualSense PS5 Controller.', 4, 55.00, 'new', '9800000004', 'available', '2025-02-13 23:42:54'),
-(10, 1, 'GoPro Hero 9', 'Waterproof action camera with 5K video.', 5, 250.00, 'used', '9800000001', 'available', '2025-02-13 23:42:54'),
-(11, 2, 'Sony Mirrorless Camera Battery', 'Rechargeable battery for Sony Alpha cameras.', 5, 40.00, 'new', '9800000002', 'available', '2025-02-13 23:42:54'),
-(12, 3, 'TP-Link WiFi Router', 'Dual-band wireless router for high-speed internet.', 6, 60.00, 'new', '9800000003', 'available', '2025-02-13 23:42:54'),
-(13, 4, 'Netgear Gigabit Switch', '8-port gigabit Ethernet switch for fast networking.', 6, 45.00, 'new', '9800000004', 'available', '2025-02-13 23:42:54'),
-(14, 1, 'Samsung 1TB SSD', 'Samsung EVO 1TB NVMe SSD for fast performance.', 7, 120.00, 'new', '9800000001', 'available', '2025-02-13 23:42:54'),
-(15, 2, 'Seagate 2TB External HDD', 'Seagate external hard drive with USB 3.0.', 7, 80.00, 'used', '9800000002', 'available', '2025-02-13 23:42:54'),
-(16, 3, 'Logitech MX Master 3', 'Ergonomic wireless mouse with multi-device support.', 8, 75.00, 'new', '9800000003', 'available', '2025-02-13 23:42:54'),
-(17, 4, 'AOC 24-inch Monitor', '1080p Full HD monitor with 144Hz refresh rate.', 8, 150.00, 'used', '9800000004', 'available', '2025-02-13 23:42:54'),
-(18, 1, 'Bose Noise-Canceling Headphones', 'Wireless headphones with active noise cancellation.', 9, 180.00, 'used', '9800000001', 'available', '2025-02-13 23:42:54'),
-(19, 2, 'JBL Bluetooth Speaker', 'Portable speaker with powerful bass and long battery.', 9, 90.00, 'new', '9800000002', 'available', '2025-02-13 23:42:54'),
-(20, 3, 'Amazon Echo Dot', 'Smart speaker with Alexa voice assistant.', 10, 45.00, 'new', '9800000003', 'available', '2025-02-13 23:42:54'),
-(21, 4, 'Google Nest Thermostat', 'Smart thermostat with energy-saving automation.', 10, 120.00, 'new', '9800000004', 'available', '2025-02-13 23:42:54'),
-(22, 1, 'Apple Watch Series 6', 'GPS model, 44mm with sport band.', 11, 250.00, 'used', '9800000001', 'available', '2025-02-13 23:42:54'),
-(23, 2, 'Fitbit Charge 5', 'Fitness tracker with heart rate and sleep tracking.', 11, 120.00, 'new', '9800000002', 'available', '2025-02-13 23:42:54'),
-(24, 3, 'HP LaserJet Printer', 'Black and white laser printer for home office.', 12, 200.00, 'used', '9800000003', 'available', '2025-02-13 23:42:54'),
-(25, 4, 'Ergonomic Office Chair', 'Adjustable chair with lumbar support.', 12, 180.00, 'new', '9800000004', 'available', '2025-02-13 23:42:54');
+INSERT INTO `products` (`product_id`, `user_id`, `title`, `description`, `category_id`, `price`, `product_condition`, `product_status`, `created_at`) VALUES
+(1, 1, 'HP Laptop Battery', 'Original HP 6-cell battery, compatible with Pavilion series. Original HP 6-cell battery, compatible with Pavilion series. Original HP 6-cell battery, compatible with Pavilion series. Original HP 6-cell battery, compatible with Pavilion series.', 1, 45.00, 'new', 'available', '2025-02-13 23:42:54'),
+(2, 2, 'Lenovo ThinkPad Keyboard', 'Replacement keyboard for ThinkPad T490 series.', 1, 30.00, 'new', 'available', '2025-02-13 23:42:54'),
+(3, 3, 'Dell 8GB DDR4 RAM', 'Dell original DDR4 RAM module for laptops.', 1, 50.00, 'used', 'available', '2025-02-13 23:42:54'),
+(4, 2, 'Samsung Galaxy S20 Battery', 'Genuine Samsung battery for Galaxy S20.', 2, 35.00, 'new', 'available', '2025-02-13 23:42:54'),
+(5, 3, 'Google Pixel 6 Charging Port', 'Original charging port replacement for Pixel 6.', 2, 25.00, 'new', 'available', '2025-02-13 23:42:54'),
+(6, 1, 'Pioneer Car Subwoofer', 'Powerful 12-inch subwoofer for deep bass.', 3, 180.00, 'used', 'available', '2025-02-13 23:42:54'),
+(7, 2, 'Dash Cam 1080p', 'Night vision dashboard camera with loop recording.', 3, 75.00, 'new', 'available', '2025-02-13 23:42:54'),
+(8, 3, 'Razer BlackWidow Keyboard', 'Mechanical gaming keyboard with RGB lighting.', 4, 90.00, 'used', 'available', '2025-02-13 23:42:54'),
+(9, 4, 'PlayStation 5 Controller', 'Official Sony DualSense PS5 Controller.', 4, 55.00, 'new', 'available', '2025-02-13 23:42:54'),
+(10, 1, 'GoPro Hero 9', 'Waterproof action camera with 5K video.', 5, 250.00, 'used', 'available', '2025-02-13 23:42:54'),
+(11, 2, 'Sony Mirrorless Camera Battery', 'Rechargeable battery for Sony Alpha cameras.', 5, 40.00, 'new', 'available', '2025-02-13 23:42:54'),
+(12, 3, 'TP-Link WiFi Router', 'Dual-band wireless router for high-speed internet.', 6, 60.00, 'new', 'available', '2025-02-13 23:42:54'),
+(13, 4, 'Netgear Gigabit Switch', '8-port gigabit Ethernet switch for fast networking.', 6, 45.00, 'new', 'available', '2025-02-13 23:42:54'),
+(14, 1, 'Samsung 1TB SSD', 'Samsung EVO 1TB NVMe SSD for fast performance.', 7, 120.00, 'new', 'available', '2025-02-13 23:42:54'),
+(15, 2, 'Seagate 2TB External HDD', 'Seagate external hard drive with USB 3.0.', 7, 80.00, 'used', 'available', '2025-02-13 23:42:54'),
+(16, 3, 'Logitech MX Master 3', 'Ergonomic wireless mouse with multi-device support.', 8, 75.00, 'new', 'available', '2025-02-13 23:42:54'),
+(17, 4, 'AOC 24-inch Monitor', '1080p Full HD monitor with 144Hz refresh rate.', 8, 150.00, 'used', 'available', '2025-02-13 23:42:54'),
+(18, 1, 'Bose Noise-Canceling Headphones', 'Wireless headphones with active noise cancellation.', 9, 180.00, 'used', 'available', '2025-02-13 23:42:54'),
+(19, 2, 'JBL Bluetooth Speaker', 'Portable speaker with powerful bass and long battery.', 9, 90.00, 'new', 'available', '2025-02-13 23:42:54'),
+(20, 3, 'Amazon Echo Dot', 'Smart speaker with Alexa voice assistant.', 10, 45.00, 'new', 'available', '2025-02-13 23:42:54'),
+(21, 4, 'Google Nest Thermostat', 'Smart thermostat with energy-saving automation.', 10, 120.00, 'new', 'available', '2025-02-13 23:42:54'),
+(22, 1, 'Apple Watch Series 6', 'GPS model, 44mm with sport band.', 11, 250.00, 'used', 'available', '2025-02-13 23:42:54'),
+(23, 2, 'Fitbit Charge 5', 'Fitness tracker with heart rate and sleep tracking.', 11, 120.00, 'new', 'available', '2025-02-13 23:42:54'),
+(24, 3, 'HP LaserJet Printer', 'Black and white laser printer for home office.', 12, 200.00, 'used', 'available', '2025-02-13 23:42:54'),
+(25, 4, 'Ergonomic Office Chair', 'Adjustable chair with lumbar support.', 12, 180.00, 'new', 'available', '2025-02-13 23:42:54'),
+(50, 7, 'iphone 6s display', 'wonderful iphone 6s display for sale wonderful iphone 6s display for sale wonderful iphone 6s display for sale wonderful iphone 6s display for sale wonderful iphone 6s display for sale', 2, 2000.00, 'used', 'available', '2025-02-16 05:20:54'),
+(51, 7, 'iphone 6s display', 'new iphone 6s display originial new iphone 6s display originialnew iphone 6s display originialnew iphone 6s display originial', 2, 1000.00, 'used', 'available', '2025-02-16 05:25:18'),
+(52, 7, 'NEW iphone 6s display', 'new iphone 6s display wow  new iphone 6s display wow new iphone 6s display wow  new iphone 6s display wow ', 2, 500.00, 'used', 'available', '2025-02-16 05:26:16'),
+(53, 7, 'BRAND NEW! iphone 6s display', ' BRAND NEW! iphone 6s displayBRAND NEW! iphone 6s displayBRAND NEW! iphone 6s displayBRAND NEW! iphone 6s display', 2, 5000.00, 'used', 'available', '2025-02-16 05:26:59'),
+(54, 7, 'SADFADSF', 'DSAFADSFAS', 9, 32425.00, 'used', 'available', '2025-02-16 05:31:44'),
+(55, 7, 'sachin lama alt post', 'ADSFDASFAS', 9, 324324.00, 'new', 'available', '2025-02-16 05:33:38'),
+(56, 7, 'ORIGINAL IPHONE 6S DISPLAY', 'get the original iphone 6s display at best price from trusted source. Hurry up what are you waiting for? ', 2, 3500.00, 'new', 'available', '2025-02-16 05:36:49'),
+(57, 6, 'test', 'dsfasdfa', 11, 235.00, 'new', 'available', '2025-02-16 05:37:35'),
+(58, 6, 'samsung', 'shaili maharjan ko samsung phone  shaili maharjan ko samsung phone  shaili maharjan ko samsung phone  shaili maharjan ko samsung phone  shaili maharjan ko samsung phone shaili maharjan ko samsung phone ', 2, 20000.00, 'used', 'available', '2025-02-16 06:06:21');
 
 -- --------------------------------------------------------
 
@@ -157,7 +173,19 @@ INSERT INTO `product_images` (`image_id`, `product_id`, `image_url`, `created_at
 (49, 22, 'uploads/apple_watch.jpg', '2025-02-13 23:43:21'),
 (50, 23, 'uploads/fitbit_charge.jpg', '2025-02-13 23:43:21'),
 (51, 24, 'uploads/hp_printer.jpg', '2025-02-13 23:43:21'),
-(52, 25, 'uploads/ergonomic_chair.jpg', '2025-02-13 23:43:21');
+(52, 25, 'uploads/ergonomic_chair.jpg', '2025-02-13 23:43:21'),
+(77, 50, '../assets/uploads/67b175b6b0a5e_iphone6.jpg', '2025-02-16 05:20:54'),
+(78, 50, '../assets/uploads/67b175b6b12b8_iphone6_2.jpg', '2025-02-16 05:20:54'),
+(79, 51, '../assets/uploads/67b176be2741b_iphone6_2.jpg', '2025-02-16 05:25:18'),
+(80, 52, '../assets/uploads/67b176f8a7767_iphone6.jpg', '2025-02-16 05:26:16'),
+(81, 53, '../assets/uploads/67b177238c183_iphone6.jpg', '2025-02-16 05:26:59'),
+(82, 54, '../assets/uploads/67b17840ad4e2_melondog.jpg', '2025-02-16 05:31:44'),
+(83, 55, '../assets/uploads/67b178b2e2fa4_iphone6_2.jpg', '2025-02-16 05:33:38'),
+(84, 56, '../assets/uploads/67b17971a334f_iphone6.jpg', '2025-02-16 05:36:49'),
+(85, 56, '../assets/uploads/67b17971a3a5d_iphone6_2.jpg', '2025-02-16 05:36:49'),
+(86, 57, '../assets/uploads/67b1799f37fae_melondog.jpg', '2025-02-16 05:37:35'),
+(87, 58, '../assets/uploads/67b1805d747a4_iphone6.jpg', '2025-02-16 06:06:21'),
+(88, 58, '../assets/uploads/67b1805d75228_iphone6_2.jpg', '2025-02-16 06:06:21');
 
 -- --------------------------------------------------------
 
@@ -187,7 +215,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `profile_image` varchar(255) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT 'default.png',
   `role` enum('admin','user') NOT NULL DEFAULT 'user',
   `status` enum('active','suspended','banned') NOT NULL DEFAULT 'active',
   `is_verified` tinyint(1) DEFAULT 0,
@@ -202,7 +230,10 @@ INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `password_hash`, 
 (1, 'John Doe', 'johndoe@example.com', '9800000001', '$2y$10$examplehash1', 'john.jpg', 'user', 'active', 1, '2025-02-13 23:38:27'),
 (2, 'Jane Smith', 'janesmith@example.com', '9800000002', '$2y$10$examplehash2', 'jane.jpg', 'user', 'active', 1, '2025-02-13 23:38:27'),
 (3, 'Alice Brown', 'alicebrown@example.com', '9800000003', '$2y$10$examplehash3', NULL, 'admin', 'active', 1, '2025-02-13 23:38:27'),
-(4, 'Bob Johnson', 'bobjohnson@example.com', '9800000004', '$2y$10$examplehash4', 'bob.jpg', 'user', 'active', 1, '2025-02-13 23:38:27');
+(4, 'Bob Johnson', 'bobjohnson@example.com', '9800000004', '$2y$10$examplehash4', 'bob.jpg', 'user', 'active', 1, '2025-02-13 23:38:27'),
+(5, 'sachin lama', 'sachinlama2003@gmail.com', '9845353156', '3533db4061dfdd3e7b135980dd0d692a2d3da73f', 'default.png', 'user', 'active', 1, '2025-02-15 06:17:33'),
+(6, 'sachin lama', 'sachinlama2060@gmail.com', '9845353155', '3533db4061dfdd3e7b135980dd0d692a2d3da73f', 'default.png', 'user', 'active', 1, '2025-02-15 06:59:14'),
+(7, 'alt sachin', 'sachinlama99@gmail.com', '9845353151', 'adcd7048512e64b48da55b027577886ee5a36350', 'default.png', 'user', 'active', 1, '2025-02-16 05:08:46');
 
 --
 -- Indexes for dumped tables
@@ -268,19 +299,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `product_requests`
@@ -292,7 +323,7 @@ ALTER TABLE `product_requests`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

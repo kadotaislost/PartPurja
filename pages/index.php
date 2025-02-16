@@ -9,9 +9,10 @@ $conn = new Database();
 
 $categoriesQuery = "SELECT * FROM categories";
 $categoriesResult = $conn->select($categoriesQuery);
-$productsQuery = "SELECT products.*, product_images.image_url 
+$productsQuery = "SELECT products.*, product_images.image_url , users.full_name
                   FROM products 
                   LEFT JOIN product_images ON products.product_id = product_images.product_id 
+                  LEFT JOIN users ON products.user_id = users.user_id
                   GROUP BY products.product_id
                   ORDER BY created_at DESC ";
 
@@ -24,17 +25,17 @@ $productsResult = $conn->select($productsQuery);
         <!-- Sidebar for Categories -->
         
         <aside class="p-5 sticky top-32 w-1/3 h-[80vh] overflow-auto rounded-lg shadow-lg bg-white hidden md:block">
-    <h2 class="text-lg font-semibold mb-4">Categories</h2>
-    <ul class="space-y-2">
-        <?php foreach ($categoriesResult as $category) : ?>
-            <li>
-                <a href="category.php?id=<?= $category['category_id']; ?>" class="block p-2 hover:bg-blue-100 rounded">
-                    <?= htmlspecialchars($category['category_name']); ?>
-                </a>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-</aside>
+            <h2 class="text-lg font-semibold mb-4">Categories</h2>
+            <ul class="space-y-2">
+                <?php foreach ($categoriesResult as $category) : ?>
+                    <li>
+                        <a href="category.php?id=<?= $category['category_id']; ?>" class="block p-2 hover:bg-blue-100 rounded">
+                            <?= htmlspecialchars($category['category_name']); ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </aside>
 
 
 
@@ -84,11 +85,12 @@ $productsResult = $conn->select($productsQuery);
                 
                 <div class="flex justify-between items-center">
                     <p class="text-green-600 font-bold mt-2">NRS <?= htmlspecialchars($product['price']); ?></p>
-                    <p class="text-xs text-gray bg-gray-200 px-2 rounded-full">
+                    <p class="text-xs text-gray bg-gray-200 px-2 py-1 rounded-full">
                         <?= htmlspecialchars(ucfirst($product['product_condition'])); ?>
-                    </p>
+                    </p> 
                 </div>
                 
+                <div class = "text-sm font-light text-gray-800 mt-2">By <?= htmlspecialchars($product['full_name'])  ?></div>
                 <a href="product.php?id=<?= $product['product_id']; ?>" 
                    class="block mt-3 text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
                     View Details

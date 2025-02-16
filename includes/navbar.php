@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include 'header.php';
 
 // Example user session data (Ensure this data is properly set after login)
@@ -8,16 +10,15 @@ $fullName = $userLoggedIn ? $_SESSION['full_name'] : ''; // User's full name
 $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's profile picture
 ?>
 
-<nav class="sticky top-0 z-10 border border-b-gray-200 bg-base-100">
+<nav class="sticky top-0 z-10 border border-b-gray-200 bg-white">
     <div class="max-w-7xl mx-auto py-7">
-        <div class="flex justify-between items-center gap-5">
+        <div class="flex justify-between items-center gap-3">
             <!-- Logo -->
-            <div class="flex items-center">
-                <img src="../assets/images/logo_noborder.png" alt="PartPurja Logo" class="w-12 h-12 rounded-full">
-                <p class="text-2xl font-semibold ml-2">
-                    <a href="index.php" class="hover:text-gray-700">PartPurja</a>
-                </p>
-            </div>
+                <a href="index.php" class="flex items-center space-x-2">
+                    <img src="../assets/images/logo_noborder.png" alt="PartPurja Logo" class="w-12 h-12 rounded-full">
+                    <p class="text-2xl font-semibold hidden sm:block">PartPurja</p>
+                </a>
+ 
 
             <!-- Search Bar -->
             <div class="flex-1 max-w-lg bg-none border border-neutral-400 p-2 rounded-lg focus-within:border-black">
@@ -48,7 +49,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                 <?php else: ?>
                     <div class="flex items-center gap-4">
                         <a href="profile.php" class="flex items-center gap-4">
-                            <img src="<?= htmlspecialchars($profilePicture) ?>" alt="Profile" class="w-12 h-12 rounded-full border">
+                            <img src="../assets/profile_pictures/<?= htmlspecialchars($profilePicture)."?".rand() ?>" alt="Profile" class="w-12 h-12 rounded-full border">
                             <span class="text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
                         </a>
                         <a class="btn btn-neutral btn-outline px-6" href="logout.php">Logout</a>
@@ -56,6 +57,12 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                 <?php endif; ?>
             </div>
 
+            <a href="profile.php" class="flex items-center gap-3 p-2 rounded hover:bg-gray-100 lg:hidden">
+                <img src="../assets/profile_pictures/<?= htmlspecialchars($profilePicture)."?".rand() ?>" 
+                    alt="Profile" 
+                    class="w-10 h-10 rounded-full border">
+                    <span class="hidden sm:inline text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
+            </a>
             <!-- Mobile Menu Button -->
             <div class="block lg:hidden">
                 <button id="menu-button" aria-label="Toggle Menu" class="text-gray-500 hover:text-gray-700 focus:outline-none">
@@ -65,6 +72,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                 </button>
             </div>
         </div>
+        
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden mt-4">
@@ -79,10 +87,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                     <a class="btn w-full text-center hover:bg-gray-100 p-2 rounded" href="register.php">Signup</a>
                     <a class="btn w-full text-center hover:bg-gray-100 p-2 rounded" href="login.php">Login</a>
                 <?php else: ?>
-                    <a href="profile.php" class="flex items-center gap-3 p-2 rounded hover:bg-gray-100">
-                        <img src="<?= htmlspecialchars($profilePicture) ?>" alt="Profile" class="w-10 h-10 rounded-full border">
-                        <span class="text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
-                    </a>
+        
                     <a class="btn w-full text-center hover:bg-gray-100 p-2 rounded" href="logout.php">Logout</a>
                 <?php endif; ?>
             </div>
