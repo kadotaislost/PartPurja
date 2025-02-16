@@ -6,7 +6,7 @@ require '../includes/database.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $conn = new Database();
-    $productQuery = "SELECT products.*, GROUP_CONCAT(product_images.image_url) AS image_urls, categories.category_name, users.full_name 
+    $productQuery = "SELECT products.*, GROUP_CONCAT(product_images.image_url) AS image_urls, categories.category_name, users.full_name, users.phone
                      FROM products 
                      LEFT JOIN product_images ON products.product_id = product_images.product_id 
                      LEFT JOIN categories ON products.category_id = categories.category_id
@@ -60,8 +60,8 @@ $comments = $conn->select($commentsQuery, [$id]);
                 <h1 class="text-3xl font-semibold text-gray-900"><?= htmlspecialchars($product['title']); ?></h1>
                 <span class = "bg-base-200 text-sm py-2 px-4 rounded-full text-gray-600"><?= htmlspecialchars($product['category_name']); ?></span>
             </div>
-            <p class = "mt-4 text-gray-700 font-semibold text-xl ">Description:</p>
-            <p class="text-md text-lg text-gray-700 mt-1 "><?= nl2br(htmlspecialchars($product['description'])); ?></p>
+            <p class = "mt-6 text-gray-700 font-semibold text-lg ">Description:</p>
+            <p class="text-lg text-gray-700 mt-1 "><?= nl2br(htmlspecialchars($product['description'])); ?></p>
             
             <p class="text-lg text-gray-600 mt-4"><span class="font-semibold">Condition:</span> <span class = "font-md text-warning"><?= htmlspecialchars($product['product_condition']); ?></span></p>
 
@@ -75,7 +75,7 @@ $comments = $conn->select($commentsQuery, [$id]);
          
 
 
-            <p class="text-lg text-gray-600 mt-4"><span class="font-semibold">Contact:</span> <span><?= htmlspecialchars($product['contact_phone']); ?></span></p>
+            <p class="text-lg text-gray-600 mt-4"><span class="font-semibold">Contact:</span> <span><?= htmlspecialchars($product['phone']); ?></span></p>
 
             <p class="text-lg text-gray-600 mt-4"><span class="font-semibold">Posted by:</span> <span ><?= htmlspecialchars($product['full_name']); ?></span></p>
 
@@ -90,7 +90,7 @@ $comments = $conn->select($commentsQuery, [$id]);
     </div>
 
     <!-- Comment Section -->
-    <div class="mt-10 bg-white p-5 rounded-lg shadow-lg">
+    <div class="mt-10 bg-white p-12 rounded-lg shadow-lg">
         <h2 class="text-2xl font-semibold text-gray-900 mb-4">Comments</h2>
 
         <!-- Display Comments -->
@@ -117,7 +117,7 @@ $comments = $conn->select($commentsQuery, [$id]);
         <!-- Add Comment Form -->
         <form action="add_comment.php" method="POST" class="mt-6">
             <input type="hidden" name="product_id" value="<?= $id; ?>">
-            <textarea name="comment_text" rows="3" class="w-full p-3 border rounded-lg" placeholder="Ask a question about this product..." required></textarea>
+            <textarea name="comment_text" rows="3" class=" focus:outline-none w-full p-3 border rounded-lg" placeholder="Ask a question about this product..." required></textarea>
             <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg">Post Comment</button>
         </form>
     </div>
@@ -150,3 +150,5 @@ $comments = $conn->select($commentsQuery, [$id]);
         nextImage();
     }, 5000);
 </script>
+
+<?php include '../includes/footer.php'; ?>
