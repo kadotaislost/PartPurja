@@ -29,13 +29,6 @@ if (isset($_GET['id'])) {
 
 $hideButtons = count($productImages) <= 1 ? 'hidden' : '';
 
-// Fetch comments for the product
-$commentsQuery = "SELECT comments.comment_text, users.full_name, users.profile_image, comments.created_at 
-                  FROM comments 
-                  LEFT JOIN users ON comments.user_id = users.user_id 
-                  WHERE comments.product_id = ? 
-                  ORDER BY comments.created_at DESC";
-$comments = $conn->select($commentsQuery, [$id]);
 ?>
 
 <div class="max-w-7xl mx-auto mt-6">
@@ -45,7 +38,7 @@ $comments = $conn->select($commentsQuery, [$id]);
             <div class="carousel_container relative overflow-hidden rounded-lg shadow-lg">
                 <?php foreach ($productImages as $index => $image_url) : ?>
                     <div class="w-full h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px] carousel-item <?= $index === 0 ? 'block' : 'hidden'; ?>">
-                        <img src="../assets/<?= htmlspecialchars($image_url); ?>" alt="<?= htmlspecialchars($product['title']); ?>" class="w-full h-full object-cover rounded-lg shadow-lg">
+                        <img src="<?= htmlspecialchars($image_url); ?>" alt="<?= htmlspecialchars($product['title']); ?>" class="w-full h-full object-cover rounded-lg shadow-lg">
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -92,39 +85,28 @@ $comments = $conn->select($commentsQuery, [$id]);
     <!-- Comment Section -->
     <div class="mt-10 bg-white p-12 rounded-lg shadow-lg">
         <h2 class="text-2xl font-semibold text-gray-900 mb-4">Comments</h2>
-
-        <!-- Display Comments -->
-        <div class="space-y-4">
-        <?php if (!empty($comments)): ?>
-        <?php foreach ($comments as $comment): ?>
-            <div class="border border-gray-200 p-4 rounded-lg flex items-start gap-4">
-                <img src="<?= htmlspecialchars($comment['profile_image']); ?>" 
-                     alt="<?= htmlspecialchars($comment['full_name']); ?>" 
-                     class="w-10 h-10 rounded-full object-cover">
-                <div>
-                    <p class="font-semibold text-gray-900"><?= htmlspecialchars($comment['full_name']); ?></p>
-                    <p class="text-gray-700"><?= htmlspecialchars($comment['comment_text']); ?></p>
-                    <p class="text-sm text-gray-500"><?= date("F j, Y, g:i a", strtotime($comment['created_at'])); ?></p>
-                </div>
+        <form action="add_comment.php" method="POST" class="mb-4">
+            <div class = "sm:flex sm:gap-2 sm:items-center">
+                <input type="hidden" name="product_id" value="<?= $id; ?>">
+                <textarea name="comment_text" rows="1" class="sm:grow w-full focus:outline-none  p-3 border rounded-lg" placeholder="Ask a question about this product..." required></textarea>
+                <button type="" class="sm:w-[180px] px-4 py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Post Comment</button>
             </div>
-        <?php endforeach; ?>
-        <?php else: ?>
-            <p class="text-gray-500">No comments yet. Be the first to ask about this product.</p>
-        <?php endif; ?>
-    </div>
+            
+        </form>
+        <!-- Display Comments -->
+        <div id="comments-section" class="space-y-4"></div>
 
 
         <!-- Add Comment Form -->
-        <form action="add_comment.php" method="POST" class="mt-6">
-            <input type="hidden" name="product_id" value="<?= $id; ?>">
-            <textarea name="comment_text" rows="3" class=" focus:outline-none w-full p-3 border rounded-lg" placeholder="Ask a question about this product..." required></textarea>
-            <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg">Post Comment</button>
-        </form>
+        
     </div>
 </div>
 
 <!-- JavaScript for Image Carousel -->
 <script>
+
+
+
     let currentImageIndex = 0;
     const images = document.querySelectorAll('.carousel-item');
 
@@ -149,6 +131,40 @@ $comments = $conn->select($commentsQuery, [$id]);
     setInterval(() => {
         nextImage();
     }, 5000);
+
+
+    // Function to Fetch and Display Comments
+    function fetchComments() {
+        fetch(`fetch_comments.php?product_id=<?= $_GET['id'] ?>`)
+            .then(response => response.json())
+            .then(comments => {
+                let commentsSection = document.getElementById("comments-section");
+                commentsSection.innerHTML = ""; // Clear existing comments
+
+                if (comments.length === 0) {
+                    commentsSection.innerHTML = "<p class='text-gray-500'>No comments yet. Be the first to ask about this product.</p>";
+                    return;
+                }
+
+                comments.forEach(comment => {
+                    let commentHTML = `
+                        <div class="border border-gray-200 p-4 rounded-lg flex items-start gap-4">
+                            <img src="${comment.profile_image}" alt="${comment.full_name}" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <p class="font-semibold text-gray-900">${comment.full_name}</p>
+                                <p class="text-gray-700">${comment.comment_text}</p>
+                                <p class="text-sm text-gray-500 mt-2">${new Date(comment.created_at).toLocaleString()}</p>
+                            </div>
+                        </div>
+                    `;
+                    commentsSection.innerHTML += commentHTML;
+                });
+            })
+            .catch(error => console.error("Error fetching comments:", error));
+    }
+
+fetchComments();
+setInterval(fetchComments, 5000);
 </script>
 
 <?php include '../includes/footer.php'; ?>

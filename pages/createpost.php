@@ -8,9 +8,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-include '../includes/header.php';
-include '../includes/navbar.php';
-
 require 'database.php';
 
 // Fetch categories
@@ -34,10 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['images'])) {
         $uploadDir = '../assets/uploads/';
         $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
         // Loop through each uploaded file
         foreach ($_FILES['images']['tmp_name'] as $index => $tmpName) {
             if ($_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
-                $fileName = basename($_FILES['images']['name'][$index]);
+                $fileName = preg_replace('/[^A-Za-z0-9.\-_]/', '_', basename($_FILES['images']['name'][$index]));
                 $fileType = $_FILES['images']['type'][$index];
 
                 // Check if the file type is allowed
@@ -58,13 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['images'])) {
         }
         
         $_SESSION['success'] = "Product posted successfully.";
-        echo "<script>
-                     window.location.href = 'index.php';
-            </script>";
+        header('Location: index.php');
         exit();
     
     }
 }
+include '../includes/header.php';
+include '../includes/navbar.php';
+
 ?>
 
 <div class="max-w-7xl mx-auto mt-6">
