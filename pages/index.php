@@ -18,15 +18,21 @@ $categoriesResult = $conn->select($categoriesQuery);
         <!-- Sidebar for Categories -->
         <aside class="p-5 sticky top-32 w-1/3 h-[80vh] overflow-auto rounded-lg shadow-lg bg-white hidden md:block">
             <h2 class="text-lg font-semibold mb-4">Categories</h2>
-            <ul class="space-y-2">
+             <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="block p-2 hover:bg-blue-100 rounded category-link" data-category-id="0">
+                        All Categories
+                        </a>
+                    </li>
                 <?php foreach ($categoriesResult as $category) : ?>
                     <li>
-                        <a href="category.php?id=<?= $category['category_id']; ?>" class="block p-2 hover:bg-blue-100 rounded">
+                        <a href="#" class="block p-2 hover:bg-blue-100 rounded category-link" 
+                        data-category-id="<?= $category['category_id']; ?>">
                             <?= htmlspecialchars($category['category_name']); ?>
                         </a>
                     </li>
                 <?php endforeach; ?>
-            </ul>
+                </ul>
         </aside>
 
         <!-- Products Section -->
@@ -43,8 +49,16 @@ $categoriesResult = $conn->select($categoriesQuery);
 </div>
 
 <script>
-    function fetchProducts() {
-        fetch("fetch_products.php")
+    let currentCategory = 0; // Store the selected category
+
+    function fetchProducts(categoryId = 0) {
+        currentCategory = categoryId; // Update the currently selected category
+        let url = "fetch_products.php";
+        if (categoryId > 0) {
+            url += "?category_id=" + categoryId;
+        }
+
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 let productContainer = document.getElementById("productList");
@@ -56,12 +70,12 @@ $categoriesResult = $conn->select($categoriesQuery);
                 data.forEach(product => {
                     let productHTML = `
                         <div class="rounded-lg p-4 shadow-lg bg-white">
-                            <img src="../assets/${product.image_url}" 
+                            <img src="${product.image_url}" 
                                  alt="${product.title}" 
-                                 class="w-full h-40 object-cover rounded-lg">
+                                 class="w-full h-45 object-cover rounded-lg">
                             
                             <h3 class="font-semibold text-lg mt-2">${product.title}</h3>
-                            <p class="text-gray-500">${product.description.substring(0, 60)}...</p>
+                            <p class="text-gray-500">${product.description.substring(0, 50)}...</p>
                             
                             <div class="flex justify-between items-center">
                                 <p class="text-green-600 font-bold mt-2">NRS ${product.price}</p>
@@ -83,9 +97,26 @@ $categoriesResult = $conn->select($categoriesQuery);
             .catch(error => console.error("Error fetching products:", error));
     }
 
-    // Fetch products on page load and every 3 seconds
-    fetchProducts();
-    setInterval(fetchProducts, 3000);
+    // Event listener for category clicks
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".category-link").forEach(link => {
+            link.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent page reload
+                
+                let categoryId = this.getAttribute("data-category-id");
+                fetchProducts(categoryId);
+            });
+        });
+
+        // Fetch all products on initial load
+        fetchProducts();
+    });
+
+    // Refresh products every 3 seconds while keeping the selected category
+    setInterval(() => {
+        fetchProducts(currentCategory);
+    }, 3000);
 </script>
+
 
 <?php include '../includes/footer.php'; ?>

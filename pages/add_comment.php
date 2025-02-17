@@ -22,7 +22,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sql = "INSERT INTO comments (comment_text, product_id, user_id) VALUES (?, ?, ?)";
         $conn->create($sql, [$comment, $post_id, $user_id]);
         $_SESSION['success'] = "Comment added successfully.";
-        echo "<script>window.location = 'product.php?id=$post_id';</script>";
+        header("Location: product.php?id=$post_id");
+        exit();
       
     }
 }

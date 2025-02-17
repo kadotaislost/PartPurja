@@ -49,7 +49,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                 <?php else: ?>
                     <div class="flex items-center gap-4">
                         <a href="profile.php" class="flex items-center gap-4">
-                            <img src="<?= htmlspecialchars($profilePicture)."?".rand() ?>" alt="Profile" class="w-12 h-12 rounded-full border">
+                            <img src="<?= htmlspecialchars($profilePicture)."?".rand() ?>" alt="Profile" class="w-12 h-12 rounded-full border border-gray-400">
                             <span class="text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
                         </a>
                         <a class="btn btn-neutral btn-outline px-6" href="logout.php">Logout</a>
@@ -58,10 +58,10 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
             </div>
 
             <?php if ($userLoggedIn): ?>
-                <a href="profile.php" class="flex items-center gap-3 p-2 rounded hover:bg-gray-100 lg:hidden">
+                <a href="profile.php" class="flex items-center gap-3 p-2 rounded  lg:hidden">
                     <img src="<?= htmlspecialchars($profilePicture)."?".rand() ?>" 
                         alt="Profile" 
-                        class="w-10 h-10 rounded-full border">
+                        class="w-10 h-10 rounded-full border border-gray-400">
                         <span class="hidden sm:inline text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
                 </a>
             <?php endif; ?>

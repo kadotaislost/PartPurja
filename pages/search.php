@@ -84,7 +84,7 @@ $searchResults = $conn->select($searchQuery, $params);
                         <div class="rounded-lg p-4 shadow-lg bg-white">
                             <img src="../assets/<?= htmlspecialchars($product['image_url']); ?>" 
                                  alt="<?= htmlspecialchars($product['title']); ?>" 
-                                 class="w-full h-40 object-cover rounded-lg">
+                                 class="w-full h-45 object-cover rounded-lg">
                             
                             <h3 class="font-semibold text-lg mt-2"><?= htmlspecialchars($product['title']); ?></h3>
                             <p class="text-gray-500"><?= substr(htmlspecialchars($product['description']), 0, 60); ?>...</p>
