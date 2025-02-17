@@ -57,12 +57,14 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
                 <?php endif; ?>
             </div>
 
-            <a href="profile.php" class="flex items-center gap-3 p-2 rounded hover:bg-gray-100 lg:hidden">
-                <img src="<?= htmlspecialchars($profilePicture)."?".rand() ?>" 
-                    alt="Profile" 
-                    class="w-10 h-10 rounded-full border">
-                    <span class="hidden sm:inline text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
-            </a>
+            <?php if ($userLoggedIn): ?>
+                <a href="profile.php" class="flex items-center gap-3 p-2 rounded hover:bg-gray-100 lg:hidden">
+                    <img src="<?= htmlspecialchars($profilePicture)."?".rand() ?>" 
+                        alt="Profile" 
+                        class="w-10 h-10 rounded-full border">
+                        <span class="hidden sm:inline text-lg font-semibold"><?= htmlspecialchars($fullName) ?></span>
+                </a>
+            <?php endif; ?>
             <!-- Mobile Menu Button -->
             <div class="block lg:hidden">
                 <button id="menu-button" aria-label="Toggle Menu" class="text-gray-500 hover:text-gray-700 focus:outline-none">

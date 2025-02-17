@@ -98,13 +98,13 @@ $comments = $conn->select($commentsQuery, [$id]);
         <?php if (!empty($comments)): ?>
         <?php foreach ($comments as $comment): ?>
             <div class="border border-gray-200 p-4 rounded-lg flex items-start gap-4">
-                <img src="../assets/profile_pictures/<?= htmlspecialchars($comment['profile_image']); ?>" 
+                <img src="<?= htmlspecialchars($comment['profile_image']); ?>" 
                      alt="<?= htmlspecialchars($comment['full_name']); ?>" 
                      class="w-10 h-10 rounded-full object-cover">
                 <div>
                     <p class="font-semibold text-gray-900"><?= htmlspecialchars($comment['full_name']); ?></p>
                     <p class="text-gray-700"><?= htmlspecialchars($comment['comment_text']); ?></p>
-                    <p class="text-sm text-gray-500"><?= date("F j, Y, g:i a", strtotime($comment['created_at'])); ?></p>
+                    <p class="text-sm text-gray-500 mt-2"><?= date("F j, Y, g:i a", strtotime($comment['created_at'])); ?></p>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -116,9 +116,12 @@ $comments = $conn->select($commentsQuery, [$id]);
 
         <!-- Add Comment Form -->
         <form action="add_comment.php" method="POST" class="mt-6">
-            <input type="hidden" name="product_id" value="<?= $id; ?>">
-            <textarea name="comment_text" rows="3" class=" focus:outline-none w-full p-3 border rounded-lg" placeholder="Ask a question about this product..." required></textarea>
-            <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg">Post Comment</button>
+            <div class = "sm:flex sm:gap-2 sm:items-center">
+                <input type="hidden" name="product_id" value="<?= $id; ?>">
+                <textarea name="comment_text" rows="1" class="sm:grow w-full focus:outline-none  p-3 border rounded-lg" placeholder="Ask a question about this product..." required></textarea>
+                <button type="" class="sm:w-[180px] px-4 py-2 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Post Comment</button>
+            </div>
+            
         </form>
     </div>
 </div>

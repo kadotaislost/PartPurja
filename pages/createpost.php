@@ -8,9 +8,6 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-include '../includes/header.php';
-include '../includes/navbar.php';
-
 require 'database.php';
 
 // Fetch categories
@@ -58,13 +55,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['images'])) {
         }
         
         $_SESSION['success'] = "Product posted successfully.";
-        echo "<script>
-                     window.location.href = 'index.php';
-            </script>";
+        header('Location: index.php');
         exit();
     
     }
 }
+include '../includes/header.php';
+include '../includes/navbar.php';
+
 ?>
 
 <div class="max-w-7xl mx-auto mt-6">
