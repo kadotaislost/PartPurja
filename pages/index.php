@@ -16,7 +16,7 @@ $categoriesResult = $conn->select($categoriesQuery);
 <div class="max-w-7xl mx-auto mt-6">
     <div class="flex gap-4">
         <!-- Sidebar for Categories -->
-        <aside class="p-5 sticky top-32 w-1/3 h-[80vh] overflow-auto rounded-lg shadow-lg bg-white hidden md:block">
+        <aside class="p-5 sticky top-32 w-[30%] h-[80vh] overflow-auto rounded-lg shadow-lg bg-white hidden md:block">
             <h2 class="text-lg font-semibold mb-4">Categories</h2>
              <ul class="space-y-2">
                     <li>
@@ -36,12 +36,35 @@ $categoriesResult = $conn->select($categoriesQuery);
         </aside>
 
         <!-- Products Section -->
-        <main class="grow">
-            
-                <h2 class="text-xl font-bold mb-4">Latest Uploads</h2>
+        <main class="w-full">
+                 <!-- Responsive Mobile Sidebar -->
+            <div class = "flex items-center gap-2 mb-4 justify-between">
+                <div class = 'flex items-center gap-2'>
+                    <div class="md:hidden">
+                        <button id="toggleSidebar" class = "cursor-pointer p-2 bg-neutral rounded-lg" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class ="fill-white"viewBox="0 -960 960 960"><path d="m260-520 220-360 220 360zM700-80q-75 0-127.5-52.5T520-260t52.5-127.5T700-440t127.5 52.5T880-260t-52.5 127.5T700-80m-580-20v-320h320v320zm580-60q42 0 71-29t29-71-29-71-71-29-71 29-29 71 29 71 71 29m-500-20h160v-160H200zm202-420h156l-78-126zm298 340"/></svg></button>
+                        <div id="mobileSidebar" class="hidden absolute mt-2 p-4 bg-white rounded-lg shadow-lg">
+                            <ul class="space-y-2">
+                                <li>
+                                    <a href="#" class="block p-2 hover:bg-blue-100 rounded category-link" data-category-id="0">
+                                    All Categories
+                                    </a>
+                                </li>
+                            <?php foreach ($categoriesResult as $category) : ?>
+                                <li>
+                                    <a href="#" class="block p-2 hover:bg-blue-100 rounded category-link" 
+                                    data-category-id="<?= $category['category_id']; ?>">
+                            <?= htmlspecialchars($category['category_name']); ?>
+                                </a>
+                                </li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <h2 class="text-xl font-bold ">Latest Uploads</h2>
+                </div>
 
-            
-
+                <button class =' btn btn-secondary btn-outline'><a href="requests.php">Requests</a></button>
+            </div>     
             <!-- Product List (Initially Empty, Filled by AJAX) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="productList"></div>
         </main>
@@ -49,6 +72,12 @@ $categoriesResult = $conn->select($categoriesQuery);
 </div>
 
 <script>
+
+    document.getElementById("toggleSidebar").addEventListener("click", function() {
+                            var sidebar = document.getElementById("mobileSidebar");
+                            sidebar.classList.toggle("hidden");
+
+                        });
     let currentCategory = 0; // Store the selected category
 
     function fetchProducts(categoryId = 0) {
@@ -86,7 +115,7 @@ $categoriesResult = $conn->select($categoriesQuery);
                             
                             <div class="text-sm font-light text-gray-800 mt-2">By ${product.full_name}</div>
                             <a href="product.php?id=${product.product_id}" 
-                               class="block mt-3 text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                               class="block mt-3 text-center text-white py-2 rounded-lg btn btn-primary">
                                 View Details
                             </a>
                         </div>

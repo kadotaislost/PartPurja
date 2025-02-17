@@ -75,17 +75,17 @@ include '../includes/navbar.php';
 
         <div class="mb-4">
             <label for="title" class="block text-lg font-medium text-gray-700">Title</label>
-            <input type="text" name="title" id="title" class="p-2 w-full rounded-lg border border-gray-400 focus:outline-none" required>
+            <input type="text" name="title" id="title" class="input p-2 w-full rounded-lg  border-gray-400 focus:outline-none" required>
         </div>
 
         <div class="mb-4">
             <label for="description" class="block text-lg font-medium text-gray-700">Description</label>
-            <textarea rows="5" name="description" id="description" class="p-2 w-full rounded-lg border border-gray-400 focus:outline-none" required></textarea>
+            <textarea rows="5" name="description" id="description" class="textarea p-2 w-full rounded-lg border border-gray-400 focus:outline-none" required></textarea>
         </div>
 
         <div class="mb-4">
             <label for="category" class="block text-lg font-medium text-gray-700">Category</label>
-            <select name="category" id="category" class="p-2 w-full rounded-lg border border-gray-400 text-gray-600 focus:outline-none" required>
+            <select name="category" id="category" class="select p-2 w-full rounded-lg border border-gray-400 text-gray-600 focus:outline-none" required>
                 <option value="">Select a Category</option>
                 <?php foreach ($categories as $category) : ?>
                     <option value="<?= htmlspecialchars($category['category_id']); ?>"><?= htmlspecialchars($category['category_name']); ?></option>
@@ -95,7 +95,7 @@ include '../includes/navbar.php';
 
         <div class="mb-4">
             <label for="condition" class="block text-lg font-medium text-gray-700">Condition</label>
-            <select name="condition" id="condition" class="p-2 w-full rounded-lg border border-gray-400 focus:outline-none text-gray-600" required>
+            <select name="condition" id="condition" class="select p-2 w-full rounded-lg border border-gray-400 focus:outline-none text-gray-600" required>
                 <option value="">Select a Condition</option>
                 <option value="New">New</option>
                 <option value="Used">Used</option>
@@ -104,7 +104,7 @@ include '../includes/navbar.php';
 
         <div class="mb-4">
             <label for="images" class="block text-lg font-medium text-gray-700">Upload Images</label>
-            <input type="file" name="images[]" id="images" class="p-2 w-full rounded-lg border border-gray-400 focus:outline-none" accept=".jpg, .jpeg, .png" multiple required>
+            <input type="file" name="images[]" id="images" class="file-input file-input-neutral w-full rounded-lg border border-gray-400 focus:outline-none" accept=".jpg, .jpeg, .png" multiple required>
         </div>
 
         <!-- Image Preview Container -->
@@ -112,10 +112,10 @@ include '../includes/navbar.php';
 
         <div class="mb-4">
             <label for="price" class="block text-lg font-medium text-gray-700">Price</label>
-            <input type="number" name="price" id="price" class="p-2 w-full rounded-lg border border-gray-400 focus:outline-none" required>
+            <input type="number" name="price" id="price" class="input p-2 w-full rounded-lg border border-gray-400 focus:outline-none" required>
         </div>
 
-        <button type="submit" id="uploadButton" class="bg-blue-600 cursor-pointer hover:bg-blue-800 text-white p-2 rounded-lg w-full">
+        <button type="submit" id="uploadButton" class="btn btn-primary cursor-pointer text-white rounded-lg w-full">
             Post Product
         </button>
     </form>

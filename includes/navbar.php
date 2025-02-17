@@ -78,7 +78,7 @@ $profilePicture = $userLoggedIn ? $_SESSION['profile_image'] : ''; // User's pro
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden mt-4">
-            <div class="flex flex-col gap-2 p-4 bg-gray-50 rounded-lg">
+            <div class="flex flex-col gap-2 p-4  rounded-lg">
                 <a class="btn w-full text-center hover:bg-gray-100 p-2 rounded" href="createpost.php">
                     <svg xmlns="http://www.w3.org/2000/svg" class="opacity-50 w-6 h-6" viewBox="0 -960 960 960">
                         <path d="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160zm40 200q-83 0-156-31.5T197-197t-85.5-127T80-480t31.5-156T197-763t127-85.5T480-880t156 31.5T763-763t85.5 127T880-480t-31.5 156T763-197t-127 85.5T480-80m0-80q134 0 227-93t93-227-93-227-227-93-227 93-93 227 93 227 227 93m0-320"/>
