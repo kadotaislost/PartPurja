@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2025 at 07:08 AM
+-- Generation Time: Feb 18, 2025 at 05:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -70,7 +70,7 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`comment_id`, `product_id`, `user_id`, `comment_text`, `created_at`) VALUES
 (1, 1, 1, 'Is this product still available?', '2025-02-15 12:41:48'),
-(2, 1, 6, 'hi! Is this product still available?', '2025-02-15 12:42:58');
+(39, 1, 14, 'test comment', '2025-02-18 16:28:13');
 
 -- --------------------------------------------------------
 
@@ -119,16 +119,7 @@ INSERT INTO `products` (`product_id`, `user_id`, `title`, `description`, `catego
 (22, 1, 'Apple Watch Series 6', 'GPS model, 44mm with sport band.', 11, 250.00, 'used', 'available', '2025-02-13 23:42:54'),
 (23, 2, 'Fitbit Charge 5', 'Fitness tracker with heart rate and sleep tracking.', 11, 120.00, 'new', 'available', '2025-02-13 23:42:54'),
 (24, 3, 'HP LaserJet Printer', 'Black and white laser printer for home office.', 12, 200.00, 'used', 'available', '2025-02-13 23:42:54'),
-(25, 4, 'Ergonomic Office Chair', 'Adjustable chair with lumbar support.', 12, 180.00, 'new', 'available', '2025-02-13 23:42:54'),
-(50, 7, 'iphone 6s display', 'wonderful iphone 6s display for sale wonderful iphone 6s display for sale wonderful iphone 6s display for sale wonderful iphone 6s display for sale wonderful iphone 6s display for sale', 2, 2000.00, 'used', 'available', '2025-02-16 05:20:54'),
-(51, 7, 'iphone 6s display', 'new iphone 6s display originial new iphone 6s display originialnew iphone 6s display originialnew iphone 6s display originial', 2, 1000.00, 'used', 'available', '2025-02-16 05:25:18'),
-(52, 7, 'NEW iphone 6s display', 'new iphone 6s display wow  new iphone 6s display wow new iphone 6s display wow  new iphone 6s display wow ', 2, 500.00, 'used', 'available', '2025-02-16 05:26:16'),
-(53, 7, 'BRAND NEW! iphone 6s display', ' BRAND NEW! iphone 6s displayBRAND NEW! iphone 6s displayBRAND NEW! iphone 6s displayBRAND NEW! iphone 6s display', 2, 5000.00, 'used', 'available', '2025-02-16 05:26:59'),
-(54, 7, 'SADFADSF', 'DSAFADSFAS', 9, 32425.00, 'used', 'available', '2025-02-16 05:31:44'),
-(55, 7, 'sachin lama alt post', 'ADSFDASFAS', 9, 324324.00, 'new', 'available', '2025-02-16 05:33:38'),
-(56, 7, 'ORIGINAL IPHONE 6S DISPLAY', 'get the original iphone 6s display at best price from trusted source. Hurry up what are you waiting for? ', 2, 3500.00, 'new', 'available', '2025-02-16 05:36:49'),
-(57, 6, 'test', 'dsfasdfa', 11, 235.00, 'new', 'available', '2025-02-16 05:37:35'),
-(58, 6, 'samsung', 'shaili maharjan ko samsung phone  shaili maharjan ko samsung phone  shaili maharjan ko samsung phone  shaili maharjan ko samsung phone  shaili maharjan ko samsung phone shaili maharjan ko samsung phone ', 2, 20000.00, 'used', 'available', '2025-02-16 06:06:21');
+(25, 4, 'Ergonomic Office Chair', 'Adjustable chair with lumbar support.', 12, 180.00, 'new', 'available', '2025-02-13 23:42:54');
 
 -- --------------------------------------------------------
 
@@ -148,44 +139,32 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`image_id`, `product_id`, `image_url`, `created_at`) VALUES
-(27, 1, 'uploads/hp_battery_1.jpg', '2025-02-13 23:43:21'),
-(28, 1, 'uploads/hp_battery_2.jpg', '2025-02-13 23:43:21'),
-(29, 2, 'uploads/thinkpad_keyboard.jpg', '2025-02-13 23:43:21'),
-(30, 3, 'uploads/dell_ram.jpg', '2025-02-13 23:43:21'),
-(31, 4, 'uploads/samsung_battery.jpg', '2025-02-13 23:43:21'),
-(32, 5, 'uploads/pixel_charging_port.jpg', '2025-02-13 23:43:21'),
-(33, 6, 'uploads/pioneer_subwoofer.jpg', '2025-02-13 23:43:21'),
-(34, 7, 'uploads/dash_cam.jpg', '2025-02-13 23:43:21'),
-(35, 8, 'uploads/razer_keyboard.jpg', '2025-02-13 23:43:21'),
-(36, 9, 'uploads/ps5_controller.jpg', '2025-02-13 23:43:21'),
-(37, 10, 'uploads/gopro_hero9.jpg', '2025-02-13 23:43:21'),
-(38, 11, 'uploads/sony_battery.jpg', '2025-02-13 23:43:21'),
-(39, 12, 'uploads/tplink_router.jpg', '2025-02-13 23:43:21'),
-(40, 13, 'uploads/netgear_switch.jpg', '2025-02-13 23:43:21'),
-(41, 14, 'uploads/samsung_ssd.jpg', '2025-02-13 23:43:21'),
-(42, 15, 'uploads/seagate_hdd.jpg', '2025-02-13 23:43:21'),
-(43, 16, 'uploads/logitech_mouse.jpg', '2025-02-13 23:43:21'),
-(44, 17, 'uploads/aoc_monitor.jpg', '2025-02-13 23:43:21'),
-(45, 18, 'uploads/bose_headphones.jpg', '2025-02-13 23:43:21'),
-(46, 19, 'uploads/jbl_speaker.jpg', '2025-02-13 23:43:21'),
-(47, 20, 'uploads/amazon_echo.jpg', '2025-02-13 23:43:21'),
-(48, 21, 'uploads/google_thermostat.jpg', '2025-02-13 23:43:21'),
-(49, 22, 'uploads/apple_watch.jpg', '2025-02-13 23:43:21'),
-(50, 23, 'uploads/fitbit_charge.jpg', '2025-02-13 23:43:21'),
-(51, 24, 'uploads/hp_printer.jpg', '2025-02-13 23:43:21'),
-(52, 25, 'uploads/ergonomic_chair.jpg', '2025-02-13 23:43:21'),
-(77, 50, '../assets/uploads/67b175b6b0a5e_iphone6.jpg', '2025-02-16 05:20:54'),
-(78, 50, '../assets/uploads/67b175b6b12b8_iphone6_2.jpg', '2025-02-16 05:20:54'),
-(79, 51, '../assets/uploads/67b176be2741b_iphone6_2.jpg', '2025-02-16 05:25:18'),
-(80, 52, '../assets/uploads/67b176f8a7767_iphone6.jpg', '2025-02-16 05:26:16'),
-(81, 53, '../assets/uploads/67b177238c183_iphone6.jpg', '2025-02-16 05:26:59'),
-(82, 54, '../assets/uploads/67b17840ad4e2_melondog.jpg', '2025-02-16 05:31:44'),
-(83, 55, '../assets/uploads/67b178b2e2fa4_iphone6_2.jpg', '2025-02-16 05:33:38'),
-(84, 56, '../assets/uploads/67b17971a334f_iphone6.jpg', '2025-02-16 05:36:49'),
-(85, 56, '../assets/uploads/67b17971a3a5d_iphone6_2.jpg', '2025-02-16 05:36:49'),
-(86, 57, '../assets/uploads/67b1799f37fae_melondog.jpg', '2025-02-16 05:37:35'),
-(87, 58, '../assets/uploads/67b1805d747a4_iphone6.jpg', '2025-02-16 06:06:21'),
-(88, 58, '../assets/uploads/67b1805d75228_iphone6_2.jpg', '2025-02-16 06:06:21');
+(27, 1, '../assets/uploads/hp_battery_1.jpg', '2025-02-13 23:43:21'),
+(28, 1, '../assets/uploads/hp_battery_2.jpg', '2025-02-13 23:43:21'),
+(29, 2, '../assets/uploads/thinkpad_keyboard.jpg', '2025-02-13 23:43:21'),
+(30, 3, '../assets/uploads/dell_ram.jpg', '2025-02-13 23:43:21'),
+(31, 4, '../assets/uploads/samsung_battery.jpg', '2025-02-13 23:43:21'),
+(32, 5, '../assets/uploads/pixel_charging_port.jpg', '2025-02-13 23:43:21'),
+(33, 6, '../assets/uploads/pioneer_subwoofer.jpg', '2025-02-13 23:43:21'),
+(34, 7, '../assets/uploads/dash_cam.jpg', '2025-02-13 23:43:21'),
+(35, 8, '../assets/uploads/razer_keyboard.jpg', '2025-02-13 23:43:21'),
+(36, 9, '../assets/uploads/ps5_controller.jpg', '2025-02-13 23:43:21'),
+(37, 10, '../assets/uploads/gopro_hero9.jpg', '2025-02-13 23:43:21'),
+(38, 11, '../assets/uploads/sony_battery.jpg', '2025-02-13 23:43:21'),
+(39, 12, '../assets/uploads/tplink_router.jpg', '2025-02-13 23:43:21'),
+(40, 13, '../assets/uploads/netgear_switch.jpg', '2025-02-13 23:43:21'),
+(41, 14, '../assets/uploads/samsung_ssd.jpg', '2025-02-13 23:43:21'),
+(42, 15, '../assets/uploads/seagate_hdd.jpg', '2025-02-13 23:43:21'),
+(43, 16, '../assets/uploads/logitech_mouse.jpg', '2025-02-13 23:43:21'),
+(44, 17, '../assets/uploads/aoc_monitor.jpg', '2025-02-13 23:43:21'),
+(45, 18, '../assets/uploads/bose_headphones.jpg', '2025-02-13 23:43:21'),
+(46, 19, '../assets/uploads/jbl_speaker.jpg', '2025-02-13 23:43:21'),
+(47, 20, '../assets/uploads/amazon_echo.jpg', '2025-02-13 23:43:21'),
+(48, 21, '../assets/uploads/google_thermostat.jpg', '2025-02-13 23:43:21'),
+(49, 22, '../assets/uploads/apple_watch.jpg', '2025-02-13 23:43:21'),
+(50, 23, '../assets/uploads/fitbit_charge.jpg', '2025-02-13 23:43:21'),
+(51, 24, '../assets/uploads/hp_printer.jpg', '2025-02-13 23:43:21'),
+(52, 25, '../assets/uploads/ergonomic_chair.jpg', '2025-02-13 23:43:21');
 
 -- --------------------------------------------------------
 
@@ -203,6 +182,36 @@ CREATE TABLE `product_requests` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product_requests`
+--
+
+INSERT INTO `product_requests` (`request_id`, `user_id`, `request_title`, `description`, `category_id`, `status`, `created_at`) VALUES
+(1, 1, 'Looking for MacBook Air Charger', 'I need an original Apple 30W USB-C power adapter for my MacBook Air.', 1, 'open', '2025-02-17 13:55:55'),
+(2, 2, 'Need Dell XPS Battery', 'Looking for a replacement battery for Dell XPS 15 (Model 7590).', 1, 'open', '2025-02-17 13:55:55'),
+(3, 3, 'iPhone 13 Pro Screen Replacement', 'My screen is cracked, looking for an original iPhone 13 Pro display.', 2, 'open', '2025-02-17 13:55:55'),
+(4, 4, 'Samsung Galaxy S21 Camera Lens', 'Need a replacement camera lens for Samsung Galaxy S21 Ultra.', 2, 'open', '2025-02-17 13:55:55'),
+(5, 1, 'Car Bluetooth Audio Adapter', 'Need a Bluetooth adapter for my Toyota Corolla (2017) audio system.', 3, 'open', '2025-02-17 13:55:55'),
+(6, 2, 'Dash Cam with Parking Mode', 'Looking for a 1080p+ dash cam that supports 24/7 parking monitoring.', 3, 'open', '2025-02-17 13:55:55'),
+(7, 3, 'Razer Gaming Headset', 'Looking for a Razer Kraken or Razer BlackShark headset for gaming.', 4, 'open', '2025-02-17 13:55:55'),
+(8, 4, 'PS5 Cooling Fan', 'Need an external cooling fan for my PlayStation 5 console.', 4, 'open', '2025-02-17 13:55:55'),
+(9, 1, 'Canon Camera Battery LP-E6N', 'Need a backup battery for my Canon EOS 90D.', 5, 'open', '2025-02-17 13:55:55'),
+(10, 2, 'Tripod for DSLR Camera', 'Looking for a sturdy tripod for landscape photography.', 5, 'open', '2025-02-17 13:55:55'),
+(11, 3, 'WiFi Range Extender', 'Need a WiFi signal booster for a large house.', 6, 'open', '2025-02-17 13:55:55'),
+(12, 4, 'Cat6 Ethernet Cables (50m)', 'Looking for high-quality Cat6 Ethernet cables for home networking.', 6, 'open', '2025-02-17 13:55:55'),
+(13, 1, 'External SSD (500GB or 1TB)', 'Need a fast portable SSD, preferably Samsung or WD.', 7, 'open', '2025-02-17 13:55:55'),
+(14, 2, 'NAS Storage System', 'Looking for a 2-bay or 4-bay NAS system for home storage.', 7, 'open', '2025-02-17 13:55:55'),
+(15, 3, 'Mechanical Keyboard with RGB', 'Looking for a good mechanical keyboard, preferably Logitech or Corsair.', 8, 'open', '2025-02-17 13:55:55'),
+(16, 4, 'Vertical Ergonomic Mouse', 'Need an ergonomic vertical mouse for wrist pain relief.', 8, 'open', '2025-02-17 13:55:55'),
+(17, 1, 'Wireless Earbuds (Noise Cancelling)', 'Looking for high-quality noise-canceling wireless earbuds.', 9, 'open', '2025-02-17 13:55:55'),
+(18, 2, 'Studio Microphone (USB/XLR)', 'Need a professional microphone for podcasting and streaming.', 9, 'open', '2025-02-17 13:55:55'),
+(19, 3, 'Smart Light Bulbs (WiFi Enabled)', 'Looking for color-changing smart bulbs compatible with Alexa.', 10, 'open', '2025-02-17 13:55:55'),
+(20, 4, 'Smart Door Lock', 'Need a smart door lock with fingerprint and remote access.', 10, 'open', '2025-02-17 13:55:55'),
+(21, 1, 'Garmin Smartwatch', 'Looking for a Garmin Forerunner series smartwatch for running.', 11, 'open', '2025-02-17 13:55:55'),
+(22, 2, 'Replacement Band for Fitbit', 'Need a replacement strap for my Fitbit Charge 4.', 11, 'open', '2025-02-17 13:55:55'),
+(23, 3, 'Standing Desk', 'Looking for a height-adjustable standing desk for home office.', 12, 'open', '2025-02-17 13:55:55'),
+(24, 4, 'Multi-Function Laser Printer', 'Need a printer with scanning and wireless printing.', 12, 'open', '2025-02-17 13:55:55');
+
 -- --------------------------------------------------------
 
 --
@@ -215,7 +224,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `profile_image` varchar(255) DEFAULT 'default.png',
+  `profile_image` varchar(255) NOT NULL DEFAULT '../assets/images/default.png',
   `role` enum('admin','user') NOT NULL DEFAULT 'user',
   `status` enum('active','suspended','banned') NOT NULL DEFAULT 'active',
   `is_verified` tinyint(1) DEFAULT 0,
@@ -227,13 +236,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `password_hash`, `profile_image`, `role`, `status`, `is_verified`, `created_at`) VALUES
-(1, 'John Doe', 'johndoe@example.com', '9800000001', '$2y$10$examplehash1', 'john.jpg', 'user', 'active', 1, '2025-02-13 23:38:27'),
-(2, 'Jane Smith', 'janesmith@example.com', '9800000002', '$2y$10$examplehash2', 'jane.jpg', 'user', 'active', 1, '2025-02-13 23:38:27'),
-(3, 'Alice Brown', 'alicebrown@example.com', '9800000003', '$2y$10$examplehash3', NULL, 'admin', 'active', 1, '2025-02-13 23:38:27'),
-(4, 'Bob Johnson', 'bobjohnson@example.com', '9800000004', '$2y$10$examplehash4', 'bob.jpg', 'user', 'active', 1, '2025-02-13 23:38:27'),
-(5, 'sachin lama', 'sachinlama2003@gmail.com', '9845353156', '3533db4061dfdd3e7b135980dd0d692a2d3da73f', 'default.png', 'user', 'active', 1, '2025-02-15 06:17:33'),
-(6, 'sachin lama', 'sachinlama2060@gmail.com', '9845353155', '3533db4061dfdd3e7b135980dd0d692a2d3da73f', 'default.png', 'user', 'active', 1, '2025-02-15 06:59:14'),
-(7, 'alt sachin', 'sachinlama99@gmail.com', '9845353151', 'adcd7048512e64b48da55b027577886ee5a36350', 'default.png', 'user', 'active', 1, '2025-02-16 05:08:46');
+(1, 'John Doe', 'johndoe@example.com', '9800000001', '$2y$10$examplehash1', '../assets/images/default.png', 'user', 'active', 1, '2025-02-13 23:38:27'),
+(2, 'Jane Smith', 'janesmith@example.com', '9800000002', '$2y$10$examplehash2', '../assets/images/default.png', 'user', 'active', 1, '2025-02-13 23:38:27'),
+(3, 'Alice Brown', 'alicebrown@example.com', '9800000003', '$2y$10$examplehash3', '../assets/images/default.png', 'admin', 'active', 1, '2025-02-13 23:38:27'),
+(4, 'Bob Johnson', 'bobjohnson@example.com', '9800000004', '$2y$10$examplehash4', '../assets/images/default.png', 'user', 'active', 1, '2025-02-13 23:38:27'),
+(13, 'sachin lama', 'sachinlama2003@gmail.com', '9845353156', 'adcd7048512e64b48da55b027577886ee5a36350', '../assets/profile_pictures/@Ehxamination.jpg', 'user', 'active', 1, '2025-02-18 15:38:43'),
+(14, 'alt sachin', 'sachinlama2060@gmail.com', '9845353155', 'adcd7048512e64b48da55b027577886ee5a36350', '../assets/profile_pictures/@Ehxamination.jpg', 'user', 'active', 1, '2025-02-18 16:27:44');
 
 --
 -- Indexes for dumped tables
@@ -299,31 +307,31 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `product_requests`
 --
 ALTER TABLE `product_requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

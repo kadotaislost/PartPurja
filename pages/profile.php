@@ -43,6 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = trim($_POST['phone']);
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === 0) {
         $uploadDir = '../assets/profile_pictures/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
         $profile_image = $uploadDir . basename($_FILES['profile_image']['name']);
         move_uploaded_file($_FILES['profile_image']['tmp_name'], $profile_image);
         $sql = "UPDATE users SET full_name=?, email=?, phone=?, profile_image=? WHERE user_id=?";
